@@ -1,1 +1,65 @@
 @import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap");
+
+@theme {
+  --font-heading: "Nunito", sans-serif;
+  --font-body:    "DM Sans", sans-serif;
+
+  /* ── Primary: Ocean Blue ── */
+  --color-primary-50:  #effafc;
+  --color-primary-100: #d6f1f7;
+  --color-primary-200: #b2e3ef;
+  --color-primary-300: #7dcee3;
+  --color-primary-400: #41afcf;
+  --color-primary-500: #2593b5;
+  --color-primary-600: #207090;
+  --color-primary-700: #22607c;
+  --color-primary-800: #245066;
+  --color-primary-900: #224457;
+  --color-primary-950: #112b3b;
+
+  /* ── Secondary: Sandy Warm ── */
+  --color-secondary-50:  #fdf6ef;
+  --color-secondary-100: #f5e6d3;
+  --color-secondary-200: #eacba3;
+  --color-secondary-300: #dda96e;
+  --color-secondary-400: #ce8840;
+  --color-secondary-500: #b56c25;
+  --color-secondary-600: #905420;
+  --color-secondary-700: #7c4522;
+  --color-secondary-800: #663924;
+  --color-secondary-900: #572f22;
+  --color-secondary-950: #3b1b11;
+
+  /* ── Tertiary: Sea Green ── */
+  --color-tertiary-50:  #f0faf5;
+  --color-tertiary-100: #d9f2e6;
+  --color-tertiary-200: #aee0c7;
+  --color-tertiary-300: #76c9a2;
+  --color-tertiary-400: #42ae7e;
+  --color-tertiary-500: #259162;
+  --color-tertiary-600: #1e7250;
+  --color-tertiary-700: #1e5f43;
+  --color-tertiary-800: #1d4e38;
+  --color-tertiary-900: #1a402f;
+  --color-tertiary-950: #0d2a1e;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
