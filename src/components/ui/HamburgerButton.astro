@@ -1,0 +1,28 @@
+---
+// Componente Hamburguesa
+interface Props {
+  label?: string;
+}
+
+const { label = "Abrir menú" } = Astro.props;
+---
+
+<button
+  id="mobile-menu-btn"
+  class="md:hidden cursor-pointer relative w-10 h-10 flex items-center justify-center rounded-lg text-primary-300 hover:text-white hover:bg-primary-800/50 transition-all duration-200"
+  aria-label={label}
+  aria-expanded="false"
+>
+  <span class="sr-only">{label}</span>
+  <div class="w-5 h-4 flex flex-col justify-between">
+    <span
+      class="h-0.5 w-full bg-current rounded transition-all duration-300 origin-center"
+      id="line1"></span>
+    <span
+      class="h-0.5 w-full bg-current rounded transition-all duration-300"
+      id="line2"></span>
+    <span
+      class="h-0.5 w-full bg-current rounded transition-all duration-300 origin-center"
+      id="line3"></span>
+  </div>
+</button>
