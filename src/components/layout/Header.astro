@@ -1,82 +1,80 @@
 ---
-// Componentes
+// Datos
+import { headerData } from "@/data/header";
+import type { HeaderData } from "@/data/header";
+
+// Subcomponentes
 import HamburgerButton from "@/components/ui/HamburgerButton.astro";
 import SocialLinkCard from "@/components/ui/SocialLinkCard.astro";
 import CtaButton from "@/components/ui/CtaButton.astro";
 import { ChevronRight } from "lucide-astro";
 
-// Interfaces
-import type { HeaderData, headerData } from "@/data/header";
+type Props = Partial<HeaderData>;
 
-type Props = HeaderData;
+const props = Astro.props;
 
+// Datos Default
 const {
-  name = "Tu Nombre",
-  role = "Web Developer",
-  logoSymbol = "</>",
-  logoHref = "/",
-  ctaLabel = "Contáctame",
-  ctaHref = "#contact",
-  navLinks = [],
-  socialLinks = [],
-} = Astro.props;
-
-const LogoSymbol = logoSymbol;
+  name        = headerData.name        ?? "Tu Nombre",
+  logoImage   = headerData.logoImage   ?? "/images/logo.png",
+  logoAlt     = headerData.logoAlt     ?? "Logo",
+  logoHref    = headerData.logoHref    ?? "/",
+  ctaLabel    = headerData.ctaLabel    ?? "Contáctame",
+  ctaHref     = headerData.ctaHref     ?? "#contact",
+  navLinks    = headerData.navLinks    ?? [],
+  socialLinks = headerData.socialLinks ?? [],
+} = props;
 ---
 
 <header
   id="main-header"
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
 >
-  <!-- Barra con efecto glassmorphism y desenfoque de fondo -->
+  <!-- Fondo glassmorphism -->
   <div
     class="absolute inset-0 bg-primary-950/80 backdrop-blur-xl border-b border-primary-800/30 transition-all duration-500"
     id="header-bg"
-  >
-  </div>
+  ></div>
 
-  <!-- Línea de acento superior animada -->
+  <!-- Línea de acento animada -->
   <div
     class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-secondary-500 via-primary-400 to-tertiary-400 animate-shimmer"
-  >
-  </div>
+  ></div>
 
   <nav class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 lg:h-20">
-      <!-- Logo / Marca -->
-      <a href={logoHref} class="group flex items-center gap-3 shrink-0">
-        <div class="relative w-9 h-9 lg:w-10 lg:h-10">
+    <div class="flex items-center justify-between h-18 lg:h-22">
+
+      <!-- Logo -->
+      <a
+        href={logoHref}
+        class="group flex items-center gap-4 shrink-0 cursor-pointer"
+        aria-label={`Ir al inicio - ${name}`}
+      >
+        <div class="relative w-12 h-12 lg:w-14 lg:h-14 group-hover:scale-105 transition-transform duration-300">
           <div
-            class="absolute inset-0 rounded-lg bg-linear-to-br from-primary-500 to-secondary-600 rotate-3 group-hover:rotate-6 transition-transform duration-300"
-          >
-          </div>
+            class="absolute inset-0 rounded-xl bg-linear-to-br from-primary-400 to-secondary-600 rotate-3 group-hover:rotate-6 transition-transform duration-300 opacity-80 group-hover:opacity-100"
+          ></div>
           <div
-            class="absolute inset-0 rounded-lg bg-linear-to-br from-primary-400 to-tertiary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            class="relative w-full h-full rounded-xl overflow-hidden bg-primary-950 border border-primary-600/60 flex items-center justify-center shadow-lg"
           >
-          </div>
-          <div
-            class="relative w-full h-full rounded-lg bg-primary-950 border border-primary-700/50 flex items-center justify-center"
-          >
-            <span
-              class="font-heading font-bold text-sm text-primary-300 group-hover:text-primary-400 transition-colors duration-300"
-            >
-              <LogoSymbol size={18} />
-            </span>
+            <img
+              src={logoImage}
+              alt={logoAlt}
+              width="56"
+              height="56"
+              class="w-full h-full object-contain drop-shadow-md p-1"
+              loading="eager"
+              decoding="async"
+            />
           </div>
         </div>
 
-        <div class="flex flex-col leading-none">
-          <span
-            class="font-heading font-bold text-lg lg:text-xl text-white group-hover:text-primary-200 transition-colors duration-300 tracking-tight"
-          >
-            {name}
-          </span>
-          <span
-            class="font-body text-[10px] lg:text-xs text-primary-400 tracking-[0.2em] uppercase font-medium"
-          >
-            {role}
-          </span>
-        </div>
+        <!--  Nombre -->
+        <span
+          class="font-heading font-bold italic text-xl lg:text-2xl bg-linear-to-r from-white via-primary-100 to-secondary-300 bg-clip-text text-transparent group-hover:from-primary-200 group-hover:via-white group-hover:to-tertiary-300 transition-all duration-300 tracking-tight pr-1"
+        >
+          {name}
+        </span>
       </a>
 
       <!-- Navegación escritorio -->
@@ -85,7 +83,7 @@ const LogoSymbol = logoSymbol;
           navLinks.map((item) => (
             <a
               href={item.href}
-              class="nav-link relative px-3 lg:px-4 py-2 font-body text-sm font-medium text-primary-300 hover:text-white transition-colors duration-200 group"
+              class="nav-link relative px-3 lg:px-4 py-2 font-body text-sm font-medium text-primary-300 hover:text-white transition-colors duration-200 group cursor-pointer"
             >
               <span class="relative z-10">{item.label}</span>
               <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-linear-to-r from-primary-400 to-tertiary-400 group-hover:w-full transition-all duration-300 rounded-full" />
@@ -95,21 +93,20 @@ const LogoSymbol = logoSymbol;
         }
       </div>
 
-      <!-- CTA escritorio -->
+      <!-- CTA + Sociales escritorio -->
       <div class="hidden md:flex items-center gap-3">
         <div class="flex items-center gap-2 mr-2">
           {socialLinks.map((social) => <SocialLinkCard {...social} />)}
         </div>
-
-        <CtaButton href={ctaHref} label={ctaLabel} variant="solid"/>
+        <CtaButton href={ctaHref} label={ctaLabel} variant="solid" />
       </div>
 
-      <!-- Botón menú móvil -->
+      <!-- Botón hamburguesa móvil -->
       <HamburgerButton />
     </div>
   </nav>
 
-  <!-- Menú desplegable móvil -->
+  <!-- Menú móvil desplegable -->
   <div
     id="mobile-menu"
     class="md:hidden absolute top-full left-0 right-0 overflow-hidden transition-all duration-500 ease-in-out max-h-0"
@@ -118,12 +115,11 @@ const LogoSymbol = logoSymbol;
     <div
       class="bg-primary-950/95 backdrop-blur-xl border-b border-primary-800/30 px-4 pt-2 pb-6 space-y-1"
     >
-      <!-- Enlaces de navegación -->
       {
         navLinks.map((item) => (
           <a
             href={item.href}
-            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-primary-300 hover:text-white hover:bg-primary-800/50 transition-all duration-200 group"
+            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-primary-300 hover:text-white hover:bg-primary-800/50 transition-all duration-200 group cursor-pointer"
           >
             {item.icon && <item.icon size={16} aria-hidden="true" />}
             <span>{item.label}</span>
@@ -135,26 +131,20 @@ const LogoSymbol = logoSymbol;
         ))
       }
 
-      <!-- Separador -->
-      <div
-        class="my-3 h-px bg-linear-to-r from-transparent via-primary-700 to-transparent"
-      >
-      </div>
+      <div class="my-3 h-px bg-linear-to-r from-transparent via-primary-700 to-transparent"></div>
 
-      <!-- Redes sociales y CTA móvil -->
       <div class="flex items-center justify-between px-2">
         <div class="flex items-center gap-3">
           {socialLinks.map((social) => <SocialLinkCard {...social} />)}
         </div>
-
         <CtaButton href={ctaHref} label={ctaLabel} />
       </div>
     </div>
   </div>
 </header>
 
-<!-- Espaciador -->
-<div class="h-16 lg:h-20"></div>
+<!-- Espaciador para compensar el header fixed -->
+<div class="h-18 lg:h-22"></div>
 
 <script>
   const header = document.getElementById("main-header");
@@ -162,16 +152,10 @@ const LogoSymbol = logoSymbol;
   const mobileMenu = document.getElementById("mobile-menu");
   const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
 
-  // Agrega clase "scrolled" al hacer scroll hacia abajo
-  window.addEventListener(
-    "scroll",
-    () => {
-      header?.classList.toggle("scrolled", window.scrollY > 20);
-    },
-    { passive: true },
-  );
+  window.addEventListener("scroll", () => {
+    header?.classList.toggle("scrolled", window.scrollY > 20);
+  }, { passive: true });
 
-  // Alterna la apertura/cierre del menú móvil
   mobileMenuBtn?.addEventListener("click", () => {
     const isOpen = mobileMenu?.classList.contains("open");
     mobileMenu?.classList.toggle("open");
@@ -180,7 +164,6 @@ const LogoSymbol = logoSymbol;
     mobileMenu?.setAttribute("aria-hidden", String(isOpen));
   });
 
-  // Cierra el menú al hacer clic en un enlace móvil
   mobileNavLinks.forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenu?.classList.remove("open");
@@ -190,26 +173,20 @@ const LogoSymbol = logoSymbol;
     });
   });
 
-  // Resalta el enlace activo según la sección visible
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll(".nav-link");
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => {
-            const isActive =
-              link.getAttribute("href") === `#${entry.target.id}`;
-            link.classList.toggle("text-white", isActive);
-            link.classList.toggle("text-primary-300", !isActive);
-          });
-        }
-      });
-    },
-    { threshold: 0.5 },
-  );
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((link) => {
+          const isActive = link.getAttribute("href") === `#${entry.target.id}`;
+          link.classList.toggle("text-white", isActive);
+          link.classList.toggle("text-primary-300", !isActive);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
 
-  // Observa cada sección para detectar cuál está en pantalla
   sections.forEach((section) => observer.observe(section));
 </script>

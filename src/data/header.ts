@@ -1,4 +1,5 @@
-import { Code2, User, Cpu, Rocket, Mail, Github, Linkedin } from "lucide-astro";
+// src/data/header.ts
+import { Heart, Home, FolderHeart, Users, Mail, Instagram, } from 'lucide-astro'
 import type { LucideIcon } from "@/types/lucide";
 
 export interface NavLink {
@@ -15,8 +16,8 @@ export interface SocialLink {
 
 export interface HeaderData {
     name?: string;
-    role?: string;
-    logoSymbol: LucideIcon;
+    logoImage?: string;
+    logoAlt?: string;
     logoHref?: string;
     navLinks?: NavLink[];
     socialLinks?: SocialLink[];
@@ -25,20 +26,21 @@ export interface HeaderData {
 }
 
 export const headerData: HeaderData = {
-    name: "Alejandro González",
-    role: "Desarrollador Web",
-    logoSymbol: Code2,
+    name: "Amigos de Shimoni",
+    logoImage: "/images/logo.png",
+    logoAlt: 'Logo Amigos de Shimoni',
     logoHref: "/",
     ctaLabel: "Descargar CV",
     ctaHref: "/docs/CV_Alejandro_Gonzalez.pdf",
     navLinks: [
-        { href: "/#hero", label: "Sobre mí", icon: User },
-        { href: "/#tech-stack", label: "Tecnologías", icon: Cpu },
-        { href: "/#projects", label: "Proyectos", icon: Rocket },
-        { href: "/#footer", label: "Contactame", icon: Mail },
+        { href: '/', label: 'Inicio', icon: Home },
+        { href: '/#proyectos', label: 'Proyectos', icon: FolderHeart },
+        { href: '/#nosotros', label: 'Sobre nosotros', icon: Users },
+        { href: '/#contacto', label: 'Contacto', icon: Mail },
     ],
     socialLinks: [
-        { href: "https://github.com/AlejandroG20", label: "GitHub", icon: Github },
-        { href: "https://www.linkedin.com/in/g2-alejandro/", label: "LinkedIn", icon: Linkedin },
+        { href: "https://github.com/AlejandroG20", label: "Instagram", icon: Instagram },
+        { href: "https://www.linkedin.com/in/g2-alejandro/", label: "LinkedIn", icon: Heart },
     ],
 };
+
