@@ -1,6 +1,8 @@
 ---
-import "../styles/global.css";
-import site from "../data/site.json";
+import "@/styles/global.css";
+import site from "@/data/site.json";
+import Header from "@/components/layout/Header.astro";
+import { headerData } from "@/data/header";
 
 interface Props {
   title?: string;
@@ -56,6 +58,7 @@ const canonicalURL = new URL(Astro.url.pathname, site.url);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
+    <Header {...headerData}/>
     <main>
       <slot name="main" />
     </main>
