@@ -58,8 +58,39 @@
   }
 
   *:focus-visible {
-    outline: 2px solid var(--color-primary-500);
+    outline: 2px solid var(--color-primary-950);
     outline-offset: 2px;
     border-radius: 4px;
   }
+}
+
+
+#main-header.scrolled #header-bg {
+    background: var(--color-primary-500);
+    box-shadow: 0 1px 32px 0 rgba(232, 81, 101, 0.12);
+}
+
+/* ============================================================
+   MENÚ MÓVIL — Estado abierto
+   ============================================================ */
+
+#mobile-menu.open {
+    max-height: 500px;
+}
+
+/* ============================================================
+   HAMBURGER — Transición a X
+   ============================================================ */
+
+#main-header.menu-open #line1 {
+    transform: rotate(45deg) translate(4px, 6px);
+}
+
+#main-header.menu-open #line2 {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+#main-header.menu-open #line3 {
+    transform: rotate(-45deg) translate(4px, -6px);
 }

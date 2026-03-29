@@ -86,8 +86,8 @@ const {
               class="nav-link relative px-3 lg:px-4 py-2 font-body text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 group cursor-pointer"
             >
               <span class="relative z-10">{item.label}</span>
-              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-linear-to-r from-secondary-400 to-tertiary-400 group-hover:w-full transition-all duration-300 rounded-full" />
-              <span class="absolute inset-0 rounded-lg bg-secondary-900/0 group-hover:bg-secondary-900/25 transition-all duration-200" />
+              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-linear-to-r from-primary-400 to-tertiary-400 group-hover:w-full transition-all duration-300 rounded-full" />
+              <span class="absolute inset-0 rounded-lg bg-secondary-900/0 group-hover:bg-primary-900/25 transition-all duration-200" />
             </a>
           ))
         }
@@ -119,7 +119,7 @@ const {
         navLinks.map((item) => (
           <a
             href={item.href}
-            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-slate-300 hover:text-white hover:bg-tertiary-900/40 transition-all duration-200 group cursor-pointer"
+            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-slate-300 hover:text-white hover:bg-primary-900/40 transition-all duration-200 group cursor-pointer"
           >
             {item.icon && <item.icon size={16} aria-hidden="true" />}
             <span>{item.label}</span>
