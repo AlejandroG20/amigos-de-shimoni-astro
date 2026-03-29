@@ -32,13 +32,13 @@ const {
 >
   <!-- Fondo glassmorphism -->
   <div
-    class="absolute inset-0 bg-primary-950/80 backdrop-blur-xl border-b border-primary-800/30 transition-all duration-500"
+    class="absolute inset-0 bg-primary-950/85 backdrop-blur-xl border-b border-secondary-800/20 transition-all duration-500"
     id="header-bg"
   ></div>
 
   <!-- Línea de acento animada -->
   <div
-    class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-secondary-500 via-primary-400 to-tertiary-400 animate-shimmer"
+    class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-secondary-400 via-tertiary-400 to-primary-400 animate-shimmer"
   ></div>
 
   <nav class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,10 +52,10 @@ const {
       >
         <div class="relative w-12 h-12 lg:w-14 lg:h-14 group-hover:scale-105 transition-transform duration-300">
           <div
-            class="absolute inset-0 rounded-xl bg-linear-to-br from-primary-400 to-secondary-600 rotate-3 group-hover:rotate-6 transition-transform duration-300 opacity-80 group-hover:opacity-100"
+            class="absolute inset-0 rounded-xl bg-linear-to-br from-secondary-400 to-tertiary-600 rotate-3 group-hover:rotate-6 transition-transform duration-300 opacity-80 group-hover:opacity-100"
           ></div>
           <div
-            class="relative w-full h-full rounded-xl overflow-hidden bg-primary-950 border border-primary-600/60 flex items-center justify-center shadow-lg"
+            class="relative w-full h-full rounded-xl overflow-hidden bg-primary-950 border border-secondary-700/40 flex items-center justify-center shadow-lg"
           >
             <img
               src={logoImage}
@@ -71,7 +71,7 @@ const {
 
         <!--  Nombre -->
         <span
-          class="font-heading font-bold italic text-xl lg:text-2xl bg-linear-to-r from-white via-primary-100 to-secondary-300 bg-clip-text text-transparent group-hover:from-primary-200 group-hover:via-white group-hover:to-tertiary-300 transition-all duration-300 tracking-tight pr-1"
+          class="font-heading font-bold italic text-xl lg:text-2xl bg-linear-to-r from-secondary-200 via-white to-tertiary-300 bg-clip-text text-transparent group-hover:from-secondary-100 group-hover:via-white group-hover:to-tertiary-200 transition-all duration-300 tracking-tight pr-1"
         >
           {name}
         </span>
@@ -83,11 +83,11 @@ const {
           navLinks.map((item) => (
             <a
               href={item.href}
-              class="nav-link relative px-3 lg:px-4 py-2 font-body text-sm font-medium text-primary-300 hover:text-white transition-colors duration-200 group cursor-pointer"
+              class="nav-link relative px-3 lg:px-4 py-2 font-body text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 group cursor-pointer"
             >
               <span class="relative z-10">{item.label}</span>
-              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-linear-to-r from-primary-400 to-tertiary-400 group-hover:w-full transition-all duration-300 rounded-full" />
-              <span class="absolute inset-0 rounded-lg bg-primary-800/0 group-hover:bg-primary-800/30 transition-all duration-200" />
+              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-linear-to-r from-secondary-400 to-tertiary-400 group-hover:w-full transition-all duration-300 rounded-full" />
+              <span class="absolute inset-0 rounded-lg bg-secondary-900/0 group-hover:bg-secondary-900/25 transition-all duration-200" />
             </a>
           ))
         }
@@ -113,25 +113,25 @@ const {
     aria-hidden="true"
   >
     <div
-      class="bg-primary-950/95 backdrop-blur-xl border-b border-primary-800/30 px-4 pt-2 pb-6 space-y-1"
+      class="bg-primary-950/95 backdrop-blur-xl border-b border-secondary-800/20 px-4 pt-2 pb-6 space-y-1"
     >
       {
         navLinks.map((item) => (
           <a
             href={item.href}
-            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-primary-300 hover:text-white hover:bg-primary-800/50 transition-all duration-200 group cursor-pointer"
+            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-slate-300 hover:text-white hover:bg-tertiary-900/40 transition-all duration-200 group cursor-pointer"
           >
             {item.icon && <item.icon size={16} aria-hidden="true" />}
             <span>{item.label}</span>
             <ChevronRight
               size={16}
-              class="ml-auto opacity-0 group-hover:opacity-100 text-tertiary-400 transition-all duration-200 -translate-x-1 group-hover:translate-x-0"
+              class="ml-auto opacity-0 group-hover:opacity-100 text-secondary-400 transition-all duration-200 -translate-x-1 group-hover:translate-x-0"
             />
           </a>
         ))
       }
 
-      <div class="my-3 h-px bg-linear-to-r from-transparent via-primary-700 to-transparent"></div>
+      <div class="my-3 h-px bg-linear-to-r from-transparent via-secondary-600 to-transparent"></div>
 
       <div class="flex items-center justify-between px-2">
         <div class="flex items-center gap-3">
@@ -182,7 +182,7 @@ const {
         navLinks.forEach((link) => {
           const isActive = link.getAttribute("href") === `#${entry.target.id}`;
           link.classList.toggle("text-white", isActive);
-          link.classList.toggle("text-primary-300", !isActive);
+          link.classList.toggle("text-slate-300", !isActive);
         });
       }
     });
