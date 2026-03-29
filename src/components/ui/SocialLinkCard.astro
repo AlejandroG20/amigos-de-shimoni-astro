@@ -1,0 +1,18 @@
+---
+// src/components/SocialLinkCard.astro
+import type { SocialLink } from "@/data/header";
+
+type Props = SocialLink;
+
+const { href, label, icon: Icon } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={label}
+  class="flex items-center justify-center w-8 h-8 rounded-lg text-primary-300 border border-primary-700/30 hover:text-white hover:bg-primary-800/25 hover:border-primary-500/60 hover:-translate-y-px hover:shadow-md hover:shadow-primary-500/20 transition-all duration-200"
+>
+  <Icon aria-hidden="true" size={16} />
+</a>
