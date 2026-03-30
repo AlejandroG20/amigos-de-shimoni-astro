@@ -15,6 +15,7 @@ import { ChevronRight } from "lucide-astro";
 type Props = Partial<HeaderData>;
 
 const props = Astro.props;
+const currentPath = Astro.url.pathname;
 
 // Datos Default
 const {
@@ -86,16 +87,20 @@ const {
       <!-- Navegación escritorio -->
       <div class="hidden md:flex items-center gap-1 lg:gap-2">
         {
-          navLinks.map((item) => (
-            <a
-              href={item.href}
-              class="nav-link relative px-3 lg:px-4 py-2 font-body text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 group cursor-pointer"
-            >
-              <span class="relative z-10">{item.label}</span>
-              <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-linear-to-r from-primary-400 to-tertiary-400 group-hover:w-full transition-all duration-300 rounded-full" />
-              <span class="absolute inset-0 rounded-lg bg-secondary-900/0 group-hover:bg-primary-900/25 transition-all duration-200" />
-            </a>
-          ))
+          navLinks.map((item) => {
+            const isActive = currentPath === item.href;
+            return (
+              <a
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                class:list={["nav-link relative px-3 lg:px-4 py-2 font-body text-sm font-medium transition-colors duration-200 group cursor-pointer", isActive ? "text-white" : "text-slate-300 hover:text-white"]}
+              >
+                <span class="relative z-10">{item.label}</span>
+                <span class:list={["absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-linear-to-r from-primary-400 to-tertiary-400 transition-all duration-300 rounded-full", isActive ? "w-full" : "w-0 group-hover:w-full"]} />
+                <span class:list={["absolute inset-0 rounded-lg transition-all duration-200", isActive ? "bg-primary-900/0" : "bg-secondary-900/0 group-hover:bg-primary-900/25"]} />
+              </a>
+            );
+          })
         }
       </div>
 
@@ -122,10 +127,13 @@ const {
       class="bg-primary-950/95 backdrop-blur-xl border-b border-secondary-800/20 px-4 pt-2 pb-6 space-y-1"
     >
       {
-        navLinks.map((item, i) => (
+        navLinks.map((item, i) => {
+          const isActive = currentPath === item.href;
+          return (
           <a
             href={item.href}
-            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-slate-300 hover:text-white hover:bg-primary-900/40 transition-all duration-200 group cursor-pointer mobile-menu-item"
+            aria-current={isActive ? "page" : undefined}
+            class:list={["mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium transition-all duration-200 group cursor-pointer mobile-menu-item", isActive ? "text-white bg-primary-900/40" : "text-slate-300 hover:text-white hover:bg-primary-900/40"]}
             style={`--item-index: ${i}`}
           >
             {item.icon && <item.icon size={16} aria-hidden="true" />}
@@ -135,7 +143,8 @@ const {
               class="ml-auto opacity-0 group-hover:opacity-100 text-secondary-400 transition-all duration-200 -translate-x-1 group-hover:translate-x-0"
             />
           </a>
-        ))
+          );
+        })
       }
 
       <div
