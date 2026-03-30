@@ -72,7 +72,7 @@ const statColors = [
     <!-- ── Nuestra historia ── -->
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
       <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
-        <div>
+        <div data-animate="fade-right">
           <span class="mb-4 inline-block font-body text-sm font-semibold uppercase tracking-wider text-secondary-500">
             {historia.label}
           </span>
@@ -86,7 +86,11 @@ const statColors = [
 
         <div class="grid grid-cols-2 gap-4">
           {stats.map((stat, i) => (
-            <div class={`flex flex-col items-center justify-center rounded-2xl p-8 text-center ${statColors[i]}`}>
+            <div
+              class={`flex flex-col items-center justify-center rounded-2xl p-8 text-center ${statColors[i]}`}
+              data-animate="fade-up"
+              data-delay={i * 100}
+            >
               <span class="font-heading text-4xl font-extrabold">{stat.value}</span>
               <span class="mt-1 font-body text-sm font-medium opacity-70">{stat.label}</span>
             </div>
@@ -98,7 +102,7 @@ const statColors = [
     <!-- ── Valores ── -->
     <div class="bg-primary-50/50 py-20 lg:py-28">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mb-14 text-center">
+        <div class="mb-14 text-center" data-animate="fade-up">
           <span class="mb-4 inline-block font-body text-sm font-semibold uppercase tracking-wider text-secondary-500">
             {valuesLabel}
           </span>
@@ -108,10 +112,14 @@ const statColors = [
         </div>
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map(({ icon, title, description, color }) => {
+          {values.map(({ icon, title, description, color }, i) => {
             const Icon = iconMap[icon];
             return (
-              <div class="group rounded-2xl border border-primary-100 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md">
+              <div
+                class="group rounded-2xl border border-primary-100 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
+                data-animate="fade-up"
+                data-delay={i * 100}
+              >
                 <div class={`mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl ${colorMap[color].wrap}`}>
                   <Icon size={22} aria-hidden="true" />
                 </div>
@@ -126,7 +134,7 @@ const statColors = [
 
     <!-- ── Equipo ── -->
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-      <div class="mb-14 text-center">
+      <div class="mb-14 text-center" data-animate="fade-up">
         <span class="mb-4 inline-block font-body text-sm font-semibold uppercase tracking-wider text-secondary-500">
           {teamLabel}
         </span>
@@ -139,11 +147,13 @@ const statColors = [
       </div>
 
       <div class="mx-auto grid max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2">
-        {team.map(member => (
+        {team.map((member, i) => (
           <article
             class="group flex flex-col overflow-hidden rounded-2xl border border-primary-100
                    bg-white shadow-sm transition-all duration-300
                    hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-950/8"
+            data-animate="fade-up"
+            data-delay={i * 150}
           >
             <div class="relative overflow-hidden bg-primary-50">
               <div class="aspect-4/3 w-full">
@@ -183,14 +193,14 @@ const statColors = [
     <!-- ── Mapa de Shimoni ── -->
     <div class="bg-primary-950 py-20 lg:py-24">
       <div class="mx-auto max-w-5xl px-6 text-center lg:px-8">
-        <span class="mb-4 inline-block font-body text-sm font-semibold uppercase tracking-wider text-primary-400">
+        <span class="mb-4 inline-block font-body text-sm font-semibold uppercase tracking-wider text-primary-400" data-animate="fade-up">
           Dónde estamos
         </span>
-        <h2 class="mb-4 font-heading text-4xl font-extrabold text-white">Shimoni, Kenia</h2>
-        <p class="mb-10 font-body text-lg leading-relaxed text-primary-200/75">
+        <h2 class="mb-4 font-heading text-4xl font-extrabold text-white" data-animate="fade-up" data-delay="100">Shimoni, Kenia</h2>
+        <p class="mb-10 font-body text-lg leading-relaxed text-primary-200/75" data-animate="fade-up" data-delay="200">
           Un pequeño pueblo costero al sur de Kenia, junto al océano Índico, donde nació nuestra misión.
         </p>
-        <div class="overflow-hidden rounded-2xl shadow-2xl shadow-black/40">
+        <div class="overflow-hidden rounded-2xl shadow-2xl shadow-black/40" data-animate="fade-up" data-delay="300">
           <iframe
             title="Mapa de Shimoni, Kenia"
             src="https://www.openstreetmap.org/export/embed.html?bbox=39.3600%2C-4.6600%2C39.4000%2C-4.6200&layer=mapnik&marker=-4.6400%2C39.3800"
@@ -218,7 +228,40 @@ const statColors = [
   .animate-underline {
     animation: underline-grow 0.8s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
+
+  /* ── Scroll animations ── */
+  [data-animate] {
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-animate="fade-up"]    { transform: translateY(32px); }
+  [data-animate="fade-right"] { transform: translateX(-32px); }
+
+  [data-animate].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-underline { animation: none; }
+    [data-animate] { opacity: 1; transform: none; transition: none; }
   }
 </style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const delay = parseInt(el.dataset.delay ?? "0", 10);
+        setTimeout(() => el.classList.add("is-visible"), delay);
+        observer.unobserve(el);
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll("[data-animate]").forEach((el) => observer.observe(el));
+</script>
