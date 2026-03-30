@@ -3,6 +3,9 @@
 import { headerData } from "@/data/header";
 import type { HeaderData } from "@/data/header";
 
+// Astro
+import { Image } from "astro:assets";
+
 // Subcomponentes
 import HamburgerButton from "@/components/ui/HamburgerButton.astro";
 import SocialLinkCard from "@/components/ui/SocialLinkCard.astro";
@@ -61,14 +64,13 @@ const {
           <div
             class="relative w-full h-full rounded-xl overflow-hidden bg-primary-950 border border-secondary-700/40 flex items-center justify-center shadow-lg"
           >
-            <img
+            <Image
               src={logoImage}
               alt={logoAlt}
-              width="56"
-              height="56"
+              width={56}
+              height={56}
               class="w-full h-full object-contain drop-shadow-md p-1"
               loading="eager"
-              decoding="async"
             />
           </div>
         </div>

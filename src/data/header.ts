@@ -27,7 +27,7 @@ export interface HeaderData {
 
 export const headerData: HeaderData = {
     name: "Amigos de Shimoni",
-    logoImage: "/images/logo.png",
+    logoImage: "/images/logo.webp",
     logoAlt: 'Logo Amigos de Shimoni',
     logoHref: "/",
     ctaLabel: "Hacerse Socio",
