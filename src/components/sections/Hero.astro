@@ -1,0 +1,242 @@
+---
+// src/components/Hero.astro
+import type { HeroData } from "@/data/hero";
+import { heroData } from "@/data/hero";
+import { Heart, Users, ArrowRight,  } from "lucide-astro";
+import CtaButtonIcon from "@/components/ui/CtaButtonIcon.astro";
+import { Image } from "astro:assets";
+import heroImg from "@/assets/images/hero.webp";
+
+const {
+  badge,
+  title,
+  titleHighlight,
+  subtitle,
+  ctaPrimary,
+  ctaSecondary,
+  image,
+  trustCard,
+} = heroData;
+---
+
+<section
+  class="relative overflow-hidden bg-white flex items-center
+         min-h-[calc(100svh-4.5rem)] lg:min-h-[calc(100svh-5.5rem)]
+         py-16 lg:py-20"
+  aria-label="Sección principal"
+>
+  <!-- Fondo: gradiente radial sutil -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0
+           bg-[radial-gradient(ellipse_80%_60%_at_70%_40%,color-mix(in_srgb,var(--color-primary-500)_8%,transparent),transparent_70%)]"
+  >
+  </div>
+
+  <!-- Fondo: patrón de puntos -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 opacity-40"
+    style="
+      background-image: radial-gradient(var(--color-primary-200) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 50% 60% at 80% 50%, black, transparent);
+    "
+  >
+  </div>
+
+  <!-- Contenedor principal -->
+  <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <!-- ── Columna izquierda: texto ── -->
+      <div class="flex flex-col">
+        <!-- Badge -->
+        <span
+          class="animate-fade-up [animation-delay:0ms]
+                 mb-5 inline-flex w-fit items-center gap-1.5
+                 rounded-full bg-primary-50 px-3.5 py-1.5
+                 font-body text-xs font-semibold uppercase tracking-wider text-primary-700"
+        >
+          <Heart size={13} aria-hidden="true" />
+          {badge}
+        </span>
+
+        <!-- Título -->
+        <h1
+          class="animate-fade-up [animation-delay:100ms]
+                 mb-5 font-heading text-5xl font-extrabold leading-tight
+                 tracking-tight text-primary-950 lg:text-6xl"
+        >
+          {title}
+          <span
+            class="relative inline-block whitespace-nowrap text-primary-600"
+          >
+            {titleHighlight}
+            <!-- Subrayado animado -->
+            <span
+              aria-hidden="true"
+              class="animate-underline absolute -bottom-1 left-0 h-1
+                     w-full rounded-full
+                     bg-linear-to-r from-primary-500 to-tertiary-400"
+            ></span>
+          </span>
+        </h1>
+
+        <!-- Subtítulo -->
+        <p
+          class="animate-fade-up [animation-delay:200ms]
+                 mb-8 max-w-prose font-body text-lg leading-relaxed text-primary-800/70"
+        >
+          {subtitle}
+        </p>
+
+        <!-- CTAs -->
+        <div
+          class="animate-fade-up [animation-delay:300ms] mb-10 flex flex-wrap gap-4"
+        >
+          <CtaButtonIcon href={ctaPrimary.href} variant="solid">
+            <Users slot="icon-start" size={17} aria-hidden="true" />
+            {ctaPrimary.text}
+          </CtaButtonIcon>
+
+          <CtaButtonIcon href={ctaSecondary.href} variant="outline">
+            {ctaSecondary.text}
+            <ArrowRight slot="icon-end" size={17} aria-hidden="true" />
+          </CtaButtonIcon>
+        </div>
+      </div>
+
+      <!-- ── Columna derecha: imagen ── -->
+      <div
+        class="animate-fade-left [animation-delay:200ms] flex justify-center"
+      >
+        <div class="relative w-full max-w-md">
+          <!-- Imagen principal -->
+          <Image
+            src={heroImg}
+            alt={image.alt}
+            width={480}
+            height={560}
+            loading="eager"
+            class="block h-105 w-full rounded-3xl object-cover
+                   shadow-2xl shadow-primary-950/20 lg:h-125"
+          />
+
+          <!-- Forma decorativa detrás de la imagen -->
+          <div
+            aria-hidden="true"
+            class="absolute -right-4 -top-4 -z-10 h-full w-full
+                   rounded-3xl bg-primary-100"
+          >
+          </div>
+
+          <!-- Tarjeta flotante de confianza -->
+          <div
+            class="animate-float absolute -bottom-5 -left-5
+                   flex items-center gap-3 rounded-2xl
+                   border border-primary-100 bg-white px-4 py-3
+                   shadow-xl shadow-primary-950/10"
+          >
+            <span
+              class="flex h-10 w-10 shrink-0 items-center justify-center
+                         rounded-xl bg-primary-50"
+            >
+              <Users size={20} class="text-primary-600" aria-hidden="true" />
+            </span>
+            <div>
+              <p
+                class="font-body text-sm font-bold leading-tight text-primary-950"
+              >
+                {trustCard.title}
+              </p>
+              <p class="font-body text-xs text-primary-700/60">
+                {trustCard.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solo @keyframes: lo que Tailwind no puede generar sin JS -->
+<style>
+  /* Entrada: sube + aparece */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Entrada: viene de la derecha */
+  @keyframes fade-left {
+    from {
+      opacity: 0;
+      transform: translateX(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Subrayado del título: crece de izquierda a derecha */
+  @keyframes underline-grow {
+    from {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    to {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  /* Tarjeta flotante */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-fade-up {
+    opacity: 0;
+    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .animate-fade-left {
+    opacity: 0;
+    animation: fade-left 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .animate-underline {
+    animation: underline-grow 0.8s 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Accesibilidad: respeta la preferencia del sistema */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up,
+    .animate-fade-left,
+    .animate-underline {
+      animation: none;
+      opacity: 1;
+    }
+    .animate-float {
+      animation: none;
+    }
+  }
+</style>
