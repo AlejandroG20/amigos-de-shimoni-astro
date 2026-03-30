@@ -53,6 +53,13 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  body {
+    background-color: #ffffff;
+    background-image: radial-gradient(#b2e3ef 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-color: #ffffff;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
