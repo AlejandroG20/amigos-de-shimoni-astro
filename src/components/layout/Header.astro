@@ -15,13 +15,13 @@ const props = Astro.props;
 
 // Datos Default
 const {
-  name        = headerData.name        ?? "Tu Nombre",
-  logoImage   = headerData.logoImage   ?? "/images/logo.png",
-  logoAlt     = headerData.logoAlt     ?? "Logo",
-  logoHref    = headerData.logoHref    ?? "/",
-  ctaLabel    = headerData.ctaLabel    ?? "Contáctame",
-  ctaHref     = headerData.ctaHref     ?? "#contact",
-  navLinks    = headerData.navLinks    ?? [],
+  name = headerData.name ?? "Tu Nombre",
+  logoImage = headerData.logoImage ?? "/images/logo.png",
+  logoAlt = headerData.logoAlt ?? "Logo",
+  logoHref = headerData.logoHref ?? "/",
+  ctaLabel = headerData.ctaLabel ?? "Contáctame",
+  ctaHref = headerData.ctaHref ?? "#contact",
+  navLinks = headerData.navLinks ?? [],
   socialLinks = headerData.socialLinks ?? [],
 } = props;
 ---
@@ -34,26 +34,30 @@ const {
   <div
     class="absolute inset-0 bg-primary-950/85 backdrop-blur-xl border-b border-secondary-800/20 transition-all duration-500"
     id="header-bg"
-  ></div>
+  >
+  </div>
 
   <!-- Línea de acento animada -->
   <div
     class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-secondary-400 via-tertiary-400 to-primary-400 animate-shimmer"
-  ></div>
+  >
+  </div>
 
   <nav class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-18 lg:h-22">
-
       <!-- Logo -->
       <a
         href={logoHref}
         class="group flex items-center gap-4 shrink-0 cursor-pointer"
         aria-label={`Ir al inicio - ${name}`}
       >
-        <div class="relative w-12 h-12 lg:w-14 lg:h-14 group-hover:scale-105 transition-transform duration-300">
+        <div
+          class="relative w-12 h-12 lg:w-14 lg:h-14 group-hover:scale-105 transition-transform duration-300"
+        >
           <div
             class="absolute inset-0 rounded-xl bg-linear-to-br from-secondary-400 to-tertiary-600 rotate-3 group-hover:rotate-6 transition-transform duration-300 opacity-80 group-hover:opacity-100"
-          ></div>
+          >
+          </div>
           <div
             class="relative w-full h-full rounded-xl overflow-hidden bg-primary-950 border border-secondary-700/40 flex items-center justify-center shadow-lg"
           >
@@ -109,17 +113,18 @@ const {
   <!-- Menú móvil desplegable -->
   <div
     id="mobile-menu"
-    class="md:hidden absolute top-full left-0 right-0 overflow-hidden transition-all duration-500 ease-in-out max-h-0"
+    class="md:hidden absolute top-full left-0 right-0 overflow-hidden transition-all duration-700 ease-in-out max-h-0"
     aria-hidden="true"
   >
     <div
       class="bg-primary-950/95 backdrop-blur-xl border-b border-secondary-800/20 px-4 pt-2 pb-6 space-y-1"
     >
       {
-        navLinks.map((item) => (
+        navLinks.map((item, i) => (
           <a
             href={item.href}
-            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-slate-300 hover:text-white hover:bg-primary-900/40 transition-all duration-200 group cursor-pointer"
+            class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl font-body font-medium text-slate-300 hover:text-white hover:bg-primary-900/40 transition-all duration-200 group cursor-pointer mobile-menu-item"
+            style={`--item-index: ${i}`}
           >
             {item.icon && <item.icon size={16} aria-hidden="true" />}
             <span>{item.label}</span>
@@ -131,7 +136,10 @@ const {
         ))
       }
 
-      <div class="my-3 h-px bg-linear-to-r from-transparent via-secondary-600 to-transparent"></div>
+      <div
+        class="my-3 h-px bg-linear-to-r from-transparent via-secondary-600 to-transparent"
+      >
+      </div>
 
       <div class="flex items-center justify-between px-2">
         <div class="flex items-center gap-3">
@@ -146,15 +154,55 @@ const {
 <!-- Espaciador para compensar el header fixed -->
 <div class="h-18 lg:h-22"></div>
 
+<style>
+  #main-header.scrolled #header-bg {
+    background: var(--color-primary-500);
+    box-shadow: 0 1px 32px 0 rgba(232, 81, 101, 0.12);
+  }
+
+  #mobile-menu.open {
+    max-height: 500px;
+  }
+
+  .mobile-menu-item {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  #mobile-menu.open .mobile-menu-item {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(0.15s + var(--item-index) * 0.07s);
+  }
+  
+  #main-header.menu-open #line1 {
+    transform: rotate(45deg) translate(4px, 6px);
+  }
+
+  #main-header.menu-open #line2 {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  #main-header.menu-open #line3 {
+    transform: rotate(-45deg) translate(4px, -6px);
+  }
+</style>
+
 <script>
   const header = document.getElementById("main-header");
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
   const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
 
-  window.addEventListener("scroll", () => {
-    header?.classList.toggle("scrolled", window.scrollY > 20);
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      header?.classList.toggle("scrolled", window.scrollY > 20);
+    },
+    { passive: true },
+  );
 
   mobileMenuBtn?.addEventListener("click", () => {
     const isOpen = mobileMenu?.classList.contains("open");
@@ -176,17 +224,21 @@ const {
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll(".nav-link");
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        navLinks.forEach((link) => {
-          const isActive = link.getAttribute("href") === `#${entry.target.id}`;
-          link.classList.toggle("text-white", isActive);
-          link.classList.toggle("text-slate-300", !isActive);
-        });
-      }
-    });
-  }, { threshold: 0.5 });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            const isActive =
+              link.getAttribute("href") === `#${entry.target.id}`;
+            link.classList.toggle("text-white", isActive);
+            link.classList.toggle("text-slate-300", !isActive);
+          });
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
 
   sections.forEach((section) => observer.observe(section));
 </script>

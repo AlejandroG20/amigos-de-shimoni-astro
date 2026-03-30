@@ -1,5 +1,5 @@
 // src/data/header.ts
-import { Heart, Home, FolderHeart, Users, Mail, Instagram, } from 'lucide-astro'
+import { Home, FolderHeart, Users, Image, Instagram, Facebook } from 'lucide-astro'
 import type { LucideIcon } from "@/types/lucide";
 
 export interface NavLink {
@@ -30,17 +30,17 @@ export const headerData: HeaderData = {
     logoImage: "/images/logo.png",
     logoAlt: 'Logo Amigos de Shimoni',
     logoHref: "/",
-    ctaLabel: "Descargar CV",
-    ctaHref: "/docs/CV_Alejandro_Gonzalez.pdf",
+    ctaLabel: "Hacerse Socio",
+    ctaHref: "/socio",
     navLinks: [
         { href: '/', label: 'Inicio', icon: Home },
-        { href: '/#proyectos', label: 'Proyectos', icon: FolderHeart },
-        { href: '/#nosotros', label: 'Sobre nosotros', icon: Users },
-        { href: '/#contacto', label: 'Contacto', icon: Mail },
+        { href: '/nosotros', label: 'Sobre nosotros', icon: Users },
+        { href: '/proyectos', label: 'Nuestros Proyectos', icon: FolderHeart },
+        { href: '/galeria', label: 'Galeria', icon: Image },
     ],
     socialLinks: [
-        { href: "https://github.com/AlejandroG20", label: "Instagram", icon: Instagram },
-        { href: "https://www.linkedin.com/in/g2-alejandro/", label: "LinkedIn", icon: Heart },
+        { href: "https://www.instagram.com/_amigosdeshimoni_/", label: "Instagram", icon: Instagram },
+        { href: "https://www.facebook.com/amigosdeshimoni/", label: "LinkedIn", icon: Facebook },
     ],
 };
 
