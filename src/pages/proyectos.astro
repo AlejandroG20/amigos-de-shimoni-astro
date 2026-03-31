@@ -1,0 +1,264 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { Target } from "lucide-astro";
+import { proyectosData } from "@/data/proyectos";
+import associationImg from "@/assets/images/association.webp";
+
+const {
+  hero,
+  mision,
+  kenia,
+  logrosLabel,
+  logrosTitle,
+  logrosDescription,
+  logros,
+} = proyectosData;
+
+const colorMap = {
+  primary: {
+    wrap: "bg-primary-100 text-primary-600",
+    card: "bg-primary-50 text-primary-600",
+    value: "text-primary-600",
+  },
+  secondary: {
+    wrap: "bg-secondary-100 text-secondary-600",
+    card: "bg-secondary-50 text-secondary-600",
+    value: "text-secondary-600",
+  },
+  tertiary: {
+    wrap: "bg-tertiary-100 text-tertiary-600",
+    card: "bg-tertiary-50 text-tertiary-600",
+    value: "text-tertiary-600",
+  },
+};
+---
+
+<Layout
+  title="Nuestros Proyectos"
+  description="Conoce los proyectos de Amigos de Shimoni: nuestra misión, por qué trabajamos en Kenia y los logros que hemos alcanzado juntos."
+>
+  <section
+    slot="main"
+    class="relative overflow-hidden"
+    aria-label="Nuestros proyectos"
+  >
+    <!-- ── Hero ── -->
+    <div
+      class="relative overflow-hidden h-screen bg-primary-950 py-24 lg:py-32"
+    >
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 opacity-20"
+        style="background-image: radial-gradient(var(--color-primary-300) 1px, transparent 1px); background-size: 28px 28px;"
+      >
+      </div>
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0
+               bg-[radial-gradient(ellipse_70%_60%_at_50%_80%,color-mix(in_srgb,var(--color-primary-500)_20%,transparent),transparent)]"
+      >
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-8">
+        <span
+          class="mb-5 inline-flex items-center gap-1.5 rounded-full
+                 bg-primary-800/60 px-4 py-1.5
+                 font-body text-xs font-semibold uppercase tracking-wider text-primary-200"
+        >
+          <Target size={13} aria-hidden="true" />
+          {hero.badge}
+        </span>
+        <h1
+          class="mb-6 font-heading text-5xl font-extrabold leading-tight
+                 tracking-tight text-white lg:text-6xl"
+        >
+          {hero.title}
+          <span class="relative inline-block text-primary-300">
+            {hero.titleHighlight}
+            <span
+              aria-hidden="true"
+              class="absolute -bottom-1 left-0 h-1 w-full rounded-full
+                     bg-linear-to-r from-primary-400 to-tertiary-400 animate-underline"
+            ></span>
+          </span>
+        </h1>
+        <p
+          class="mx-auto max-w-2xl font-body text-lg leading-relaxed text-primary-200/80"
+        >
+          {hero.description}
+        </p>
+      </div>
+    </div>
+
+    <!-- ── Misión ── -->
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-10">
+      <div
+        class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20"
+      >
+        <div data-animate="fade-right">
+          <span
+            class="mb-4 inline-block font-body text-sm font-semibold uppercase tracking-wider text-secondary-500"
+          >
+            {mision.label}
+          </span>
+          <h2
+            class="mb-6 font-heading text-4xl font-extrabold leading-tight text-primary-950"
+          >
+            {mision.title}
+          </h2>
+          <div
+            class="space-y-4 font-body text-base leading-relaxed text-primary-800/70"
+          >
+            {mision.paragraphs.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+
+        <!-- Visual image -->
+        <div data-animate="fade-up" data-delay="100">
+          <Image
+            src={associationImg}
+            alt="Asociación Amigos de Shimoni"
+            class="w-full rounded-2xl object-cover shadow-lg"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Por qué Kenia ── -->
+    <div class="bg-primary-50/50 py-20 lg:py-10">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div data-animate="fade-right">
+          <span
+            class="mb-4 inline-block font-body text-sm font-semibold uppercase tracking-wider text-secondary-500"
+          >
+            {kenia.label}
+          </span>
+          <h2
+            class="mb-6 font-heading text-4xl font-extrabold leading-tight text-primary-950"
+          >
+            {kenia.title}
+          </h2>
+          <div
+            class="space-y-4 font-body text-base leading-relaxed text-primary-800/70"
+          >
+            {kenia.paragraphs.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Logros ── -->
+    <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-10">
+      <div class="mb-14 text-center" data-animate="fade-up">
+        <span
+          class="mb-4 inline-block font-body text-sm font-semibold uppercase tracking-wider text-secondary-500"
+        >
+          {logrosLabel}
+        </span>
+        <h2 class="mb-4 font-heading text-4xl font-extrabold text-primary-950">
+          {logrosTitle}
+        </h2>
+        <p
+          class="mx-auto max-w-xl font-body text-base leading-relaxed text-primary-800/65"
+        >
+          {logrosDescription}
+        </p>
+      </div>
+
+      <div class="mx-auto grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          logros.map(({ icon: Icon, value, label, description, color }, i) => (
+            <article
+              class="group flex flex-col rounded-2xl border border-primary-100 bg-white p-6 shadow-sm
+                   transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-950/8"
+              data-animate="fade-up"
+              data-delay={i * 100}
+            >
+              <div
+                class={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${colorMap[color].wrap}`}
+              >
+                <Icon size={24} aria-hidden="true" />
+              </div>
+              <span
+                class={`mb-1 font-heading text-4xl font-extrabold ${colorMap[color].value}`}
+              >
+                {value}
+              </span>
+              <h3 class="mb-2 font-heading text-base font-bold text-primary-950">
+                {label}
+              </h3>
+              <p class="font-body text-sm leading-relaxed text-primary-800/65">
+                {description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @keyframes underline-grow {
+    from {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    to {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+  .animate-underline {
+    animation: underline-grow 0.8s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  [data-animate] {
+    opacity: 0;
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-animate="fade-up"] {
+    transform: translateY(32px);
+  }
+  [data-animate="fade-right"] {
+    transform: translateX(-32px);
+  }
+
+  [data-animate].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-underline {
+      animation: none;
+    }
+    [data-animate] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const delay = parseInt(el.dataset.delay ?? "0", 10);
+        setTimeout(() => el.classList.add("is-visible"), delay);
+        observer.unobserve(el);
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  document
+    .querySelectorAll("[data-animate]")
+    .forEach((el) => observer.observe(el));
+</script>
