@@ -1,4 +1,3 @@
-// src/data/header.ts
 import { Home, FolderHeart, Users, Image, Instagram, Facebook } from 'lucide-astro'
 import type { LucideIcon } from "@/types/lucide";
 

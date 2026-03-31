@@ -1,4 +1,5 @@
-// src/data/nosotros.ts
+import { Heart, Users, BookOpen, Leaf } from "lucide-astro";
+import type { LucideIcon } from "@/types/lucide";
 
 export interface TeamMember {
   name: string;
@@ -9,7 +10,7 @@ export interface TeamMember {
 }
 
 export interface Value {
-  icon: "Heart" | "Users" | "BookOpen" | "Leaf";
+  icon: LucideIcon;
   title: string;
   description: string;
   color: "primary" | "secondary" | "tertiary";
@@ -40,60 +41,55 @@ export interface NosotrosData {
   teamTitle: string;
   teamDescription: string;
   team: TeamMember[];
-  cta: {
-    title: string;
-    description: string;
-    buttonText: string;
-    href: string;
-  };
 }
 
 export const nosotrosData: NosotrosData = {
   hero: {
-    badge: "Quiénes somos",
-    title: "Personas que creen en",
-    titleHighlight: "el cambio",
+    badge: "Nuestra historia",
+    title: "Nacimos de un viaje,",
+    titleHighlight: "crecimos con un propósito",
     description:
-      "Somos una asociación sin ánimo de lucro formada por voluntarios que trabajamos para mejorar la vida de las familias de la costa de Kenia a través de proyectos de educación, sanidad y sostenibilidad.",
+      "La Asociación Amigos de Shimoni nace a finales del 2023. Tras un viaje a Kenia, volvimos con el firme propósito de ayudar a escolarizar al mayor número de niños posible, procedentes de familias desfavorecidas.",
   },
   historia: {
-    label: "Nuestra historia",
-    title: "Nacimos de la necesidad de tender un puente",
+    label: "Quiénes somos",
+    title: "Un sueño compartido entre dos mundos",
     paragraphs: [
-      "Amigos de Shimoni nació en 2015 cuando un grupo de amigos visitó la pequeña aldea costera de Shimoni, en el sur de Kenia, y quedaron impactados por la realidad de sus familias.",
-      "Lo que comenzó como una iniciativa personal se convirtió en una asociación registrada con proyectos sostenibles de largo alcance: becas educativas, pozos de agua potable, consultorios médicos y huertos comunitarios.",
-      "Hoy somos más de 50 socios y colaboradores que, desde Extremadura, hacemos posible que cada euro donado llegue directamente a quien más lo necesita.",
+      "Somos Ofelia y Samson, y compartimos un sueño que nos une: que cada niño y niña en las zonas rurales de Kenia pueda ir a la escuela, aprender y soñar con un futuro mejor.",
+      "Samson conoce de primera mano la vida en estas comunidades; nació y creció allí, y sabe lo que significa enfrentarse a la falta de recursos y oportunidades. Yo, Ofelia, aporto mi experiencia profesional y mi compromiso con la igualdad, pero lo más importante es que juntos creemos que cada pequeño gesto puede cambiar una vida.",
+      "Nuestra Asociación no sería lo que es sin todas las personas que nos acompañan en este camino: quienes donan, quienes dedican su tiempo, quienes nos animan y empujan a seguir adelante. Cada uno de ellos forma parte de este proyecto y del futuro de los niños y niñas a los que ayudamos.",
+      "Creemos que la educación es mucho más que libros y clases; es una oportunidad para crecer, para soñar y para romper ciclos de desigualdad. Y trabajamos cada día con la esperanza de que, con un poco de ayuda, esos sueños puedan hacerse realidad.",
     ],
   },
   stats: [
-    { value: "+3", label: "Años activos" },
-    { value: "50+", label: "Voluntarios" },
-    { value: "2+", label: "Familias beneficiadas" },
-    { value: "15+", label: "Proyectos completados" },
+    { value: "100%", label: "Donaciones directas a proyectos" },
+    { value: "0€", label: "Gastos de gestión" },
+    { value: "2", label: "Países conectados" },
+    { value: "∞", label: "Ganas de cambiar el mundo" },
   ],
   valuesLabel: "Lo que nos mueve",
   valuesTitle: "Nuestros valores",
   values: [
     {
-      icon: "Heart",
+      icon: Heart,
       title: "Compromiso",
       description: "Trabajamos con el corazón por el bienestar de las familias de Shimoni, Kenia.",
       color: "primary",
     },
     {
-      icon: "Users",
+      icon: Users,
       title: "Comunidad",
       description: "Creemos en el poder de las personas unidas para generar cambios duraderos.",
       color: "secondary",
     },
     {
-      icon: "BookOpen",
+      icon: BookOpen,
       title: "Educación",
       description: "La educación es la herramienta más poderosa para transformar vidas.",
       color: "tertiary",
     },
     {
-      icon: "Leaf",
+      icon: Leaf,
       title: "Sostenibilidad",
       description: "Nuestros proyectos respetan el entorno y garantizan el futuro de la comunidad.",
       color: "tertiary",
@@ -119,11 +115,4 @@ export const nosotrosData: NosotrosData = {
       initials: "SN",
     },
   ],
-  cta: {
-    title: "¿Quieres unirte al equipo?",
-    description:
-      "Buscamos voluntarios apasionados que quieran marcar la diferencia. Escríbenos y cuéntanos cómo puedes aportar.",
-    buttonText: "Quiero colaborar",
-    href: "mailto:amigosdeshimoni@gmail.com",
-  },
 };

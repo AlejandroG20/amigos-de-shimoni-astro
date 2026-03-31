@@ -1,5 +1,3 @@
-// src/data/hero.ts
-
 export interface HeroData {
     badge: string;
     title: string;
