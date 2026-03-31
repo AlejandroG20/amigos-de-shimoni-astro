@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
 import { Heart } from "lucide-astro";
 import { nosotrosData } from "@/data/nosotros";
 
@@ -150,9 +151,11 @@ const statColors = [
           >
             <div class="relative overflow-hidden bg-primary-50">
               <div class="aspect-4/3 w-full">
-                <img
+                <Image
                   src={member.image}
                   alt={`Foto de ${member.name}`}
+                  width={400}
+                  height={300}
                   class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                 />
