@@ -1,13 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Image } from "astro:assets";
-import { Heart, Users, Leaf, BookOpen } from "lucide-astro";
+import { Heart } from "lucide-astro";
 import { nosotrosData } from "@/data/nosotros";
-import heroImg from "@/assets/images/hero.webp";
 
 const { hero, historia, stats, valuesLabel, valuesTitle, values, teamLabel, teamTitle, teamDescription, team } = nosotrosData;
-
-const iconMap = { Heart, Users, BookOpen, Leaf };
 
 const colorMap = {
   primary:   { wrap: "bg-primary-100 text-primary-600" },
@@ -112,9 +108,7 @@ const statColors = [
         </div>
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map(({ icon, title, description, color }, i) => {
-            const Icon = iconMap[icon];
-            return (
+          {values.map(({ icon: Icon, title, description, color }, i) => (
               <div
                 class="group rounded-2xl border border-primary-100 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
                 data-animate="fade-up"
@@ -126,8 +120,7 @@ const statColors = [
                 <h3 class="mb-2 font-heading text-lg font-bold text-primary-950">{title}</h3>
                 <p class="font-body text-sm leading-relaxed text-primary-800/65">{description}</p>
               </div>
-            );
-          })}
+          ))}
         </div>
       </div>
     </div>
