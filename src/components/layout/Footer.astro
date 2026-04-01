@@ -97,7 +97,7 @@ const currentYear = new Date().getFullYear();
           ¿Tienes alguna pregunta o quieres colaborar? Escríbenos.
         </p>
 
-        <form class="flex flex-col gap-3" onsubmit="return false;" novalidate>
+        <form id="contact-form" class="flex flex-col gap-3" novalidate>
           <div class="flex flex-col gap-1.5">
             <label
               for="footer-name"
@@ -148,14 +148,56 @@ const currentYear = new Date().getFullYear();
             ></textarea>
           </div>
 
-          <CtaButtonIcon type="submit" class="mt-1">
-            <Mail slot="icon-start" size={14} />
-            Enviar mensaje
-          </CtaButtonIcon>
+          <div id="contact-submit">
+            <CtaButtonIcon type="submit" class="mt-1">
+              <Mail slot="icon-start" size={14} />
+              <span id="contact-submit-label">Enviar mensaje</span>
+            </CtaButtonIcon>
+          </div>
+
+          <p id="contact-feedback" class="hidden font-body text-xs text-center rounded-lg px-3 py-2"></p>
         </form>
       </div>
     </div>
   </div>
+
+  <script>
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+    const submitLabel = document.getElementById('contact-submit-label');
+    const feedback = document.getElementById('contact-feedback');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!submitBtn || !submitLabel || !feedback) return;
+
+      submitBtn.disabled = true;
+      submitLabel.textContent = 'Enviando...';
+      feedback.className = 'hidden font-body text-xs text-center rounded-lg px-3 py-2';
+
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch('/api/contact', { method: 'POST', body: formData });
+        const json = await res.json();
+
+        if (res.ok) {
+          feedback.textContent = '¡Mensaje enviado! Te responderemos pronto.';
+          feedback.className = 'font-body text-xs text-center rounded-lg px-3 py-2 bg-green-900/40 text-green-300 border border-green-700/40';
+          form.reset();
+        } else {
+          feedback.textContent = json.error ?? 'Error al enviar el mensaje.';
+          feedback.className = 'font-body text-xs text-center rounded-lg px-3 py-2 bg-red-900/40 text-red-300 border border-red-700/40';
+        }
+      } catch {
+        feedback.textContent = 'Error de conexión. Inténtalo de nuevo.';
+        feedback.className = 'font-body text-xs text-center rounded-lg px-3 py-2 bg-red-900/40 text-red-300 border border-red-700/40';
+      } finally {
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Enviar mensaje';
+      }
+    });
+  </script>
 
   <!-- Barra legal inferior -->
   <div class="border-t border-secondary-800/20">
