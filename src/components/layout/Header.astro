@@ -9,8 +9,8 @@ import { Image } from "astro:assets";
 // Subcomponentes
 import HamburgerButton from "@/components/ui/HamburgerButton.astro";
 import SocialLinkCard from "@/components/ui/SocialLinkCard.astro";
-import CtaButton from "@/components/ui/CtaButton.astro";
-import { ChevronRight } from "lucide-astro";
+import CtaButtonIcon from "@/components/ui/CtaButtonIcon.astro";
+import { ChevronRight, Users } from "lucide-astro";
 
 type Props = Partial<HeaderData>;
 
@@ -109,7 +109,10 @@ const {
         <div class="flex items-center gap-2 mr-2">
           {socialLinks.map((social) => <SocialLinkCard {...social} />)}
         </div>
-        <CtaButton href={ctaHref} label={ctaLabel} variant="solid" />
+        <CtaButtonIcon href={ctaHref} variant="solid">
+          {ctaLabel}
+          <Users slot="icon-start" size={16} />
+        </CtaButtonIcon>
       </div>
 
       <!-- Botón hamburguesa móvil -->
@@ -156,7 +159,10 @@ const {
         <div class="flex items-center gap-3">
           {socialLinks.map((social) => <SocialLinkCard {...social} />)}
         </div>
-        <CtaButton href={ctaHref} label={ctaLabel} />
+        <CtaButtonIcon href={ctaHref} variant="solid">
+          {ctaLabel}
+          <Users slot="icon-start" size={16} />
+        </CtaButtonIcon>
       </div>
     </div>
   </div>

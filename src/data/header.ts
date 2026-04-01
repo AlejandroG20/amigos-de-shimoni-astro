@@ -1,4 +1,4 @@
-import { Home, FolderHeart, Users, Image, Instagram, Facebook } from 'lucide-astro'
+import { Home, FolderHeart, Users, Image, Instagram, Mail } from 'lucide-astro'
 import type { LucideIcon } from "@/types/lucide";
 
 export interface NavLink {
@@ -39,7 +39,7 @@ export const headerData: HeaderData = {
     ],
     socialLinks: [
         { href: "https://www.instagram.com/_amigosdeshimoni_/", label: "Instagram", icon: Instagram },
-        { href: "https://www.facebook.com/amigosdeshimoni/", label: "LinkedIn", icon: Facebook },
+        { href: "mailto:amigosdeshimoni@gmail.com", label: "Correo Electrónico", icon: Mail },
     ],
 };
 
