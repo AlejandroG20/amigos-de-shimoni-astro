@@ -33,7 +33,7 @@ export const site: SiteData = {
     denominacion: "Asociación Amigos de Shimoni",
     cif: "GXXXXXXXX",
     domicilio: "Calle Ejemplo, 1, 06400 Don Benito, Badajoz",
-    registro: "Registro de Asociaciones de Extremadura, nº XXXXX",
-    responsable: "Nombre del Responsable",
+    registro: "Inscrita en el Registro Nacional de Asociaciones con el número 74427 (2024)",
+    responsable: "Ofelia Arias",
   },
 }

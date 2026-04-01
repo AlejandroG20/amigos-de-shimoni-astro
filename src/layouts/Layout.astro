@@ -2,6 +2,7 @@
 import "@/styles/global.css";
 import {site} from "@/data/site";
 import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
 
 interface Props {
   title?: string;
@@ -62,5 +63,6 @@ const canonicalURL = new URL(Astro.url.pathname, site.url);
       <slot name="main" />
     </main>
     <slot name="after-main" />
+    <Footer />
   </body>
 </html>
